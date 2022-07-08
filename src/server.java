@@ -22,7 +22,7 @@ public class server {
     }
     private static int cpu(){
         Random random = new Random();
-        int server_hand = random.nextInt(2)+1;
+        int server_hand = random.nextInt(3)+1;
         return server_hand;
     }
     private static String judge(int client_hand,int server_hand){

@@ -4,15 +4,15 @@ import javax.swing.*;
 import java.awt.GridLayout;
 import java.awt.event.*;
 
-public class Client extends JFrame implements ActionListener{
+public class client extends JFrame implements ActionListener{
     public static void main(String[] args){
-        new Client();
+        new client();
     }
     public int myhand;
     JButton button1;
     JButton button2;
     JButton button3;
-    Client(){
+    client(){
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         getContentPane().setLayout(new GridLayout(1,3));
         button1 = new JButton("グー");
