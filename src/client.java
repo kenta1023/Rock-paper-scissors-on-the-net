@@ -1,28 +1,40 @@
 import java.io.*;
 import java.net.*;
-import java.util.Scanner;
 import javax.swing.*;
 import java.awt.GridLayout;
+import java.awt.event.*;
 
-class MyFrame extends JFrame{
-    MyFrame(){
+public class Client extends JFrame implements ActionListener{
+    public static void main(String[] args){
+        new Client();
+    }
+    public int myhand;
+    JButton button1;
+    JButton button2;
+    JButton button3;
+    Client(){
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         getContentPane().setLayout(new GridLayout(1,3));
-        getContentPane().add(new JButton("グー"));
-        getContentPane().add(new JButton("チョキ"));
-        getContentPane().add(new JButton("パー"));
+        button1 = new JButton("グー");
+        button1.addActionListener(this);
+        getContentPane().add(button1);
+        button2 = new JButton("チョキ");
+        button2.addActionListener(this);
+        getContentPane().add(button2);
+        button3 = new JButton("パー");
+        button3.addActionListener(this);
+        getContentPane().add(button3);
         setSize(300,200);
         setVisible(true);
     }
-}
-
-public class client {
-    public static void main(String[] args){
-        new MyFrame();
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("1 or 2 or 3 >>>");
-        int myhand = scanner.nextInt();
-        scanner.close();
+    public void actionPerformed(ActionEvent ae){
+        if (ae.getSource() == button1){
+            myhand = 1;
+        }else if (ae.getSource() == button2){
+            myhand = 2;
+        }else if (ae.getSource() == button3){
+            myhand = 3;
+        }
         try{
             Socket socket = new Socket("127.0.0.1",5000);
             DataOutputStream out = new DataOutputStream(socket.getOutputStream());
