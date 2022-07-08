@@ -13,7 +13,7 @@ public class server {
                 int client_hand = in.readInt();
                 String judge = judge(client_hand,cpu);
                 PrintWriter writer = new PrintWriter(socket.getOutputStream());
-                writer.println("あなた:"+client_hand+"cpu:"+cpu+"あなたの"+judge);
+                writer.println("あなた:"+client_hand+"  cpu:"+cpu+"  あなたの"+judge);
                 writer.close();
             }
         }catch (IOException e){
