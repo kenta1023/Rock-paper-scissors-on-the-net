@@ -4,6 +4,7 @@ import java.util.Random;
 
 public class server {
     public static void main(String[] args){
+        final String[] hand = {null,"グー","チョキ","パー"};
         try{
             ServerSocket serverSocket = new ServerSocket(5000);
             while(true){
@@ -13,7 +14,7 @@ public class server {
                 int client_hand = in.readInt();
                 String judge = judge(client_hand,cpu);
                 PrintWriter writer = new PrintWriter(socket.getOutputStream());
-                writer.println("あなた:"+client_hand+"  cpu:"+cpu+"  あなたの"+judge);
+                writer.println("あなた:"+hand[client_hand]+"  cpu:"+hand[cpu]+"  "+judge);
                 writer.close();
             }
         }catch (IOException e){

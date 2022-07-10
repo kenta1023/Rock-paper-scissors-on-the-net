@@ -67,11 +67,10 @@ public class client extends JFrame implements ActionListener{
         try{
             Socket socket = new Socket("127.0.0.1",5000);
             DataOutputStream out = new DataOutputStream(socket.getOutputStream());
-            out.writeInt(myhand);
+            out.writeInt(myhand);       //選択した手を送信
             BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            String message = reader.readLine();
-            System.out.println(message);
-            label.setText(message);
+            String message = reader.readLine();     //結果を受け取り
+            label.setText(message);     //カード２のラベルに結果を与える
             out.close();
             reader.close();
             socket.close();
