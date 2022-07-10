@@ -2,23 +2,20 @@ import java.io.*;
 import java.net.*;
 import java.util.Random;
 
-public class server {
-    public static void main(String[] args){
-        final String[] hand = {null,"グー","チョキ","パー"};
-        ServerSocket serverSocket;
+class MyThread extends Thread{
+    public MyThread(Socket socket){
         try{
-            serverSocket = new ServerSocket(5000);
-            while(true){
-                Socket socket = serverSocket.accept();
-                DataInputStream in = new DataInputStream(socket.getInputStream());
-                int cpu = cpu();
-                int client_hand = in.readInt();
-                String judge = judge(client_hand,cpu);
-                PrintWriter writer = new PrintWriter(socket.getOutputStream());
-                writer.println("YOU("+hand[client_hand]+")   vs   CPU("+hand[cpu]+")/"+judge);
-                writer.close();
-            }
-        }catch (IOException e){
+            DataInputStream in = new DataInputStream(socket.getInputStream());
+            int cpu = cpu();
+            int client_hand = in.readInt();
+            String judge = judge(client_hand,cpu);
+            PrintWriter writer = new PrintWriter(socket.getOutputStream());
+            final String[] hand = {null,"グー","チョキ","パー"};
+            String message ="YOU("+hand[client_hand]+")   vs   CPU("+hand[cpu]+")/"+judge;
+            writer.println(message);
+            System.out.println(socket.getRemoteSocketAddress()+ " 送信:" +message);
+            writer.close();
+        }catch(IOException e){
             System.out.println(e);
         }
     }
@@ -34,6 +31,22 @@ public class server {
             return "勝ち";
         }else{
             return "負け";
+        }
+    }
+}
+
+public class server {
+    public static void main(String[] args){
+        ServerSocket serverSocket;
+        try{
+            serverSocket = new ServerSocket(5000);
+            while(true){
+                Socket socket = serverSocket.accept();
+                MyThread thread = new MyThread(socket);
+                thread.start();
+            }
+        }catch (IOException e){
+            System.out.println(e);
         }
     }
 }
