@@ -19,24 +19,24 @@ public class client extends JFrame implements ActionListener{
     JButton button2;
     JButton button3;
     client(){
-        JPanel panel1 = new JPanel();
+        JPanel card1 = new JPanel();
 
         button1 = new JButton("グー");
         button1.addActionListener(this);
-        panel1.add(button1);
+        card1.add(button1);
         button2 = new JButton("チョキ");
         button2.addActionListener(this);
-        panel1.add(button2);
+        card1.add(button2);
         button3 = new JButton("パー");
         button3.addActionListener(this);
-        panel1.add(button3);
+        card1.add(button3);
 
-        getContentPane().add(panel1);
+        getContentPane().add(card1);
 
-        JPanel panel2 = new JPanel();
+        JPanel card2 = new JPanel();
 
         JLabel result = new JLabel("message");
-        panel2.add(result);
+        card2.add(result);
 
 
     }
