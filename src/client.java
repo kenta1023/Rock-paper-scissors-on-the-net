@@ -1,31 +1,44 @@
 import java.io.*;
 import java.net.*;
 import javax.swing.*;
-import java.awt.GridLayout;
+import java.awt.*;
 import java.awt.event.*;
 
 public class client extends JFrame implements ActionListener{
+    JPanel cardPanel;
+    CardLayout layout;
     public static void main(String[] args){
-        new client();
+        client frame = new client();
+        frame.setSize(300,200);
+        frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        frame.setVisible(true);
     }
+
     public int myhand;
     JButton button1;
     JButton button2;
     JButton button3;
     client(){
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new GridLayout(1,3));
+        JPanel panel1 = new JPanel();
+
         button1 = new JButton("グー");
         button1.addActionListener(this);
-        getContentPane().add(button1);
+        panel1.add(button1);
         button2 = new JButton("チョキ");
         button2.addActionListener(this);
-        getContentPane().add(button2);
+        panel1.add(button2);
         button3 = new JButton("パー");
         button3.addActionListener(this);
-        getContentPane().add(button3);
-        setSize(300,200);
-        setVisible(true);
+        panel1.add(button3);
+
+        getContentPane().add(panel1);
+
+        JPanel panel2 = new JPanel();
+
+        JLabel result = new JLabel("message");
+        panel2.add(result);
+
+
     }
     public void actionPerformed(ActionEvent ae){
         if (ae.getSource() == button1){
