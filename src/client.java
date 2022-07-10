@@ -13,14 +13,17 @@ public class client extends JFrame implements ActionListener{
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         frame.setVisible(true);
     }
-
+    //ボタン変数の宣言
     public int myhand;
+    JLabel label =new JLabel();
     JButton button1;
     JButton button2;
     JButton button3;
-    client(){
-        JPanel card1 = new JPanel();
 
+    client(){
+        //カード１
+        JPanel card1 = new JPanel();
+        card1.setLayout(new GridLayout(1,3));
         button1 = new JButton("グー");
         button1.addActionListener(this);
         card1.add(button1);
@@ -30,17 +33,22 @@ public class client extends JFrame implements ActionListener{
         button3 = new JButton("パー");
         button3.addActionListener(this);
         card1.add(button3);
-
-        getContentPane().add(card1);
-
+        //カード２
         JPanel card2 = new JPanel();
+        card2.add(label);
+        //パネルにカードを登録
+        cardPanel = new JPanel();
+        layout = new CardLayout();
+        cardPanel.setLayout(layout);
+        cardPanel.add(card1);
+        cardPanel.add(card2);
 
-        JLabel result = new JLabel("message");
-        card2.add(result);
-
+        getContentPane().add(cardPanel, BorderLayout.CENTER);
 
     }
+    //イベント処理
     public void actionPerformed(ActionEvent ae){
+        layout.next(cardPanel);
         if (ae.getSource() == button1){
             myhand = 1;
         }else if (ae.getSource() == button2){
@@ -55,6 +63,7 @@ public class client extends JFrame implements ActionListener{
             BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             String message = reader.readLine();
             System.out.println(message);
+            label.setText(message);
             out.close();
             reader.close();
             socket.close();
