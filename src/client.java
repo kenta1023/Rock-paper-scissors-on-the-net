@@ -19,6 +19,7 @@ public class client extends JFrame implements ActionListener{
     JButton button1;
     JButton button2;
     JButton button3;
+    JButton againButton;
 
     client(){
         //カード１
@@ -36,6 +37,9 @@ public class client extends JFrame implements ActionListener{
         //カード２
         JPanel card2 = new JPanel();
         card2.add(label);
+        againButton = new JButton("もう一回");
+        againButton.addActionListener(this);
+        card2.add(againButton);
         //パネルにカードを登録
         cardPanel = new JPanel();
         layout = new CardLayout();
@@ -48,13 +52,17 @@ public class client extends JFrame implements ActionListener{
     }
     //イベント処理
     public void actionPerformed(ActionEvent ae){
-        layout.next(cardPanel);
         if (ae.getSource() == button1){
             myhand = 1;
+            layout.next(cardPanel);
         }else if (ae.getSource() == button2){
             myhand = 2;
+            layout.next(cardPanel);
         }else if (ae.getSource() == button3){
             myhand = 3;
+            layout.next(cardPanel);
+        }else if (ae.getSource() == againButton){
+            layout.first(cardPanel);
         }
         try{
             Socket socket = new Socket("127.0.0.1",5000);
